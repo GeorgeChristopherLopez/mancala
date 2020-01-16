@@ -8,9 +8,12 @@
 <body>
     <div class="header"><h3>Mancala</h3></div>
     <div class="board">
-       <div id="computer-mankala"class="mankala"><a>mankala</a></div>
+        <ul id="computer-mankala-side">
+            <li id="computer-mankala" class="mankala">
+            </li>
+        </ul>
         <div class="pits">
-            <ul class="pc-pits">
+            <ul class="computer-pits">
                 <li>gem</li>
                 <li>gem</li>
                 <li>gem</li>
@@ -27,7 +30,10 @@
                 <li>gem</li>
             </ul>
         </div>
-        <div id="player-mankala" class="mankala"><div id="player-mankala-container" class="container"></div></div>
+        <ul>
+            <li id="player-mankala" class="mankala"></li>
+
+        </ul>
     </div>
     <div class="control-board"><div>Player Score: 250</div><div>Computer Score: 350</div></div>
     <script src="js/app.js"></script>
