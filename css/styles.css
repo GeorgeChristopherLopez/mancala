@@ -7,7 +7,22 @@
 body {
     background: #81C8FA;
 }
+.turn-table{
+    display:inline;
+    margin: 1rem auto;
+    text-align: center;
+    
+}
 
+.turn-table button{
+    outline: none;
+    border: none;
+    color: white;
+    background: black;
+    width: 4rem;
+    height: 3rem;
+margin: 1rem 4rem;
+}
 li {
     list-style: none;
 }
@@ -76,4 +91,7 @@ img{
 
 .mankala .container{
     margin: 70% auto 0;
+}
+button.turn{
+    background-color: red;
 }

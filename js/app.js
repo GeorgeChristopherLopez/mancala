@@ -2,7 +2,10 @@ let board = document.querySelector('.board');
 let pits = Array.from(document.querySelectorAll('li'));
 let playerMankala = document.getElementById('player-mankala');
 let computerMankala = document.getElementById('computer-mankala');
-
+let playerPits = document.querySelector('.player-pits');
+let computerPits = document.querySelector('.computer-pits');
+let cTurn = document.querySelector('.cTurn');
+let pTurn = document.querySelector('.pTurn');
 let arrayValue = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0];
 
 
@@ -26,10 +29,18 @@ let displayUpdate = () => {
     }
 
 }
+let turnHandler = () => {
 
+}
 displayUpdate();
 
 board.addEventListener('click', e => {
+   /*******************/
+    /*if (pTurn.classList.contains('turn')) {
+    }
+    let checkTurn;
+    turn == pTurn ? checkTurn = `` : checkTurn = ``; 
+    */
     let clicked = event.target;
     if (array.includes(clicked) && clicked.classList.contains('mankala')==false) {
         let i = array.indexOf(clicked);
@@ -44,6 +55,8 @@ board.addEventListener('click', e => {
                 console.log(arrayValue[i]);
             }
         }
+        pTurn.classList.toggle('turn');
+        cTurn.classList.toggle('turn');
         displayUpdate();
     };
 });
