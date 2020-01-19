@@ -25,6 +25,7 @@ margin: 1rem 4rem;
 }
 li {
     list-style: none;
+    cursor: pointer;
 }
 .header {
     margin: 10% auto 0;
