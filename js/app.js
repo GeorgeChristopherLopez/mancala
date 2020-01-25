@@ -49,6 +49,8 @@ board.addEventListener('click', e => {
     let oppositeSide;
     let currentMankala;
     let turn;
+    let extraTurn = false;
+
     if (pTurn.classList.contains('turn')) {
         currentSide = playerPits;
         currentMankala = playerMankala;
@@ -70,7 +72,7 @@ board.addEventListener('click', e => {
     let clicked = event.target;
     if (array.includes(clicked) && clicked.classList.contains('mankala') == false && clicked.parentNode == currentSide) {
         let i = array.indexOf(clicked);
-
+      
         if (arrayValue[i] > 0) {
             let temp = arrayValue[i];
             for (let z = 1; temp > 0; z++) {
@@ -82,9 +84,8 @@ board.addEventListener('click', e => {
            
                 lastDropValue = arrayValue[i + z];
             }
-        }
 
-        if (arrayValue[i] > 0) {
+
             // board value math
             for (let y = 1; arrayValue[i] > 0; y++) {
                 if ((i + y) == 14) {
@@ -93,63 +94,84 @@ board.addEventListener('click', e => {
                 arrayValue[i + y]++;
                 arrayValue[i]--;
                 lastDrop = array[i + y];
-            }
-         
-            let thisArr = Array.from(currentSide.querySelectorAll('li'));
-            let otherArr = Array.from(oppositeSide.querySelectorAll('li'));
-            console.log(otherArr);
-            if (thisArr.includes(lastDrop)) {
-                opLastDrop = otherArr[thisArr.indexOf(lastDrop)];
-                let indexOfOppDrop = otherArr.indexOf(opLastDrop);
-                if (turn === "player") {
 
-                    switch (indexOfOppDrop) {
-                        case 0:
-                            indexOfOppDrop = 13;
-                            break;
-                        case 1:
-                            indexOfOppDrop = 12;
-                            break;
-                        case 2:
-                            indexOfOppDrop = 11;
-                            break;
-                        case 3:
-                            indexOfOppDrop = 10;
-                            break;
-                        case 4:
-                            indexOfOppDrop = 9;
-                            break;
-                        case 5:
-                            indexOfOppDrop = 8;
-                            break;
-                        default:
-                            return indexOfOppDrop;
+
+                let thisArr = Array.from(currentSide.querySelectorAll('li'));
+                let otherArr = Array.from(oppositeSide.querySelectorAll('li'));
+                console.log(otherArr);
+                if (thisArr.includes(lastDrop)) {
+                    opLastDrop = otherArr[thisArr.indexOf(lastDrop)];
+                    let indexOfOppDrop = otherArr.indexOf(opLastDrop);
+                    if (turn === "player") {
+
+                        switch (indexOfOppDrop) {
+                            case 0:
+                                indexOfOppDrop = 12;
+                                break;
+                            case 1:
+                                indexOfOppDrop = 11;
+                                break;
+                            case 2:
+                                indexOfOppDrop = 10;
+                                break;
+                            case 3:
+                                indexOfOppDrop = 9;
+                                break;
+                            case 4:
+                                indexOfOppDrop = 8;
+                                break;
+                            case 5:
+                                indexOfOppDrop = 7;
+                                break;
+                            default:
+                                return indexOfOppDrop;
+                        }
                     }
-                }
 
-           
-              if (lastDropValue == 0) {
-                    console.log('last drop', lastDrop);
-                    console.log('last drop value', lastDropValue);
-                    console.log('last drop value AFTER', arrayValue[array.indexOf(lastDrop)]);
-                    console.log('oplastdrop', opLastDrop);
-                    console.log('indexof opp drop', indexOfOppDrop);
-                    console.log('value of opp', arrayValue[indexOfOppDrop]);
+
+                    if (lastDropValue == 0) {
+
+                        console.log('last drop', lastDrop);
+                        console.log('last drop value', lastDropValue);
+                        console.log('last drop value AFTER', arrayValue[array.indexOf(lastDrop)]);
+                        console.log('oplastdrop', opLastDrop);
+                        console.log('indexof opp drop', indexOfOppDrop);
+                        opLastDropValue = arrayValue[indexOfOppDrop];
+                        console.log('oplastdrop value', opLastDropValue);
+                        if (opLastDropValue > 0) {
+                            extraTurn = true;
+                            console.log('morepoints baby!')
+                        }
+
+                    }
+
+
+
 
                 }
-              
-             
-               
-              
-            }   
-            if (currentMankala == lastDrop) {
-                console.log('extra turn');
+                if (currentMankala == lastDrop) {
+                    extraTurn = true;
+                    console.log('extra turn');
+                }
             }
+            if (!extraTurn) {
+                pTurn.classList.toggle('turn');
+                cTurn.classList.toggle('turn');
+            }
+            //VIEW update display
+            displayUpdate();
+
+
+
+
+
+
+
+
         }
-        pTurn.classList.toggle('turn');
-        cTurn.classList.toggle('turn');
-        //VIEW update display
-        displayUpdate();
+
+       
+           
     };
 });
 
