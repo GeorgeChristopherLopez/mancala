@@ -44,12 +44,13 @@ let displayUpdate = () => {
 
 // CONTROLLER FUNCTION
 board.addEventListener('click', e => {
+    let extraTurn = false;
     // SIDE CHECKER
     let currentSide;
     let oppositeSide;
     let currentMankala;
     let turn;
-    let extraTurn = false;
+  
 
     if (pTurn.classList.contains('turn')) {
         currentSide = playerPits;
@@ -94,15 +95,16 @@ board.addEventListener('click', e => {
                 arrayValue[i + y]++;
                 arrayValue[i]--;
                 lastDrop = array[i + y];
-
+            }
 
                 let thisArr = Array.from(currentSide.querySelectorAll('li'));
                 let otherArr = Array.from(oppositeSide.querySelectorAll('li'));
                 console.log(otherArr);
                 if (thisArr.includes(lastDrop)) {
                     opLastDrop = otherArr[thisArr.indexOf(lastDrop)];
-                    let indexOfOppDrop = otherArr.indexOf(opLastDrop);
-                    if (turn === "player") {
+                    let indexOfOppDrop = array.indexOf(opLastDrop);
+                    let indexOfLastDrop = array.indexOf(lastDrop);
+                  /*  if (turn === "player") {
 
                         switch (indexOfOppDrop) {
                             case 0:
@@ -126,21 +128,25 @@ board.addEventListener('click', e => {
                             default:
                                 return indexOfOppDrop;
                         }
-                    }
+                    }*/
+                    console.log('index of last drop', indexOfLastDrop);
+                    console.log('last drop', lastDrop);
+                    console.log('last drop value', lastDropValue);
+                    console.log('last drop value AFTER', arrayValue[array.indexOf(lastDrop)]);
+                    console.log('oplastdrop', opLastDrop);
+                    console.log('indexof opp drop', indexOfOppDrop);
+                    opLastDropValue = arrayValue[indexOfOppDrop];
+                    console.log('oplastdrop value', opLastDropValue);
 
+                    if (lastDropValue == 0 && thisArr.includes(lastDrop)) {
 
-                    if (lastDropValue == 0) {
-
-                        console.log('last drop', lastDrop);
-                        console.log('last drop value', lastDropValue);
-                        console.log('last drop value AFTER', arrayValue[array.indexOf(lastDrop)]);
-                        console.log('oplastdrop', opLastDrop);
-                        console.log('indexof opp drop', indexOfOppDrop);
-                        opLastDropValue = arrayValue[indexOfOppDrop];
-                        console.log('oplastdrop value', opLastDropValue);
-                        if (opLastDropValue > 0) {
-                            extraTurn = true;
+                        if (opLastDropValue > 0 && otherArr.includes(opLastDrop)) {
+                     
                             console.log('morepoints baby!')
+                            arrayValue[indexOfLastDrop] += arrayValue[indexOfOppDrop];
+                            arrayValue[indexOfOppDrop] = 0;
+                            arrayValue[array.indexOf(currentMankala)] += arrayValue[indexOfLastDrop];
+                            arrayValue[indexOfLastDrop] = 0;
                         }
 
                     }
@@ -149,25 +155,17 @@ board.addEventListener('click', e => {
 
 
                 }
-                if (currentMankala == lastDrop) {
+                if (lastDrop == currentMankala) {
                     extraTurn = true;
                     console.log('extra turn');
                 }
-            }
+            
             if (!extraTurn) {
                 pTurn.classList.toggle('turn');
                 cTurn.classList.toggle('turn');
             }
             //VIEW update display
             displayUpdate();
-
-
-
-
-
-
-
-
         }
 
        
