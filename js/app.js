@@ -50,7 +50,7 @@ board.addEventListener('click', e => {
     let oppositeSide;
     let currentMankala;
     let turn;
-  
+
 
     if (pTurn.classList.contains('turn')) {
         currentSide = playerPits;
@@ -64,14 +64,17 @@ board.addEventListener('click', e => {
         oppositeSide = playerPits;
         turn = "computer";
     }
-        
+    let thisArr = Array.from(currentSide.querySelectorAll('li'));
+    let otherArr = Array.from(oppositeSide.querySelectorAll('li'));
     // CLICK CHECKER
     let lastDrop;
     let lastDropValue;
     let opLastDrop;
     let opLastDropValue;
     let clicked = event.target;
-    if (array.includes(clicked) && clicked.classList.contains('mankala') == false && clicked.parentNode == currentSide) {
+    console.log(clicked.parentElement);
+
+    if (array.includes(clicked)  && clicked.classList.contains('mankala') == false && clicked.parentNode == currentSide) {
         let i = array.indexOf(clicked);
       
         if (arrayValue[i] > 0) {
@@ -97,8 +100,7 @@ board.addEventListener('click', e => {
                 lastDrop = array[i + y];
             }
 
-                let thisArr = Array.from(currentSide.querySelectorAll('li'));
-                let otherArr = Array.from(oppositeSide.querySelectorAll('li'));
+               
                 console.log(otherArr);
                 if (thisArr.includes(lastDrop)) {
                     opLastDrop = otherArr[thisArr.indexOf(lastDrop)];
